@@ -1,28 +1,37 @@
 # Brain Tumor MRI Classification using MobileNetV3Large
 
+A proof-of-concept deep learning project exploring the use of transfer learning for multiclass brain MRI image classification. This repository demonstrates a possible workflow using TensorFlow and MobileNetV3Large and is intended for educational and research purposes only.
+
+> **Note**
+> This project is an experimental concept and is **not** a production-ready medical application. It has not been clinically validated and should not be used for diagnosis or patient care.
+
+---
+
 ## Overview
 
-This project implements a **deep learning–based brain tumor classification system** using MRI images. The model uses **transfer learning with MobileNetV3Large** to classify MRI scans into **four tumor categories**.
+This project investigates whether transfer learning can be used to distinguish between four categories of brain MRI images:
 
-The system is trained on a publicly available MRI dataset and uses **TensorFlow/Keras**, **mixed precision training**, and **data augmentation** to improve training efficiency and model performance.
+- Glioma
+- Meningioma
+- Pituitary Tumor
+- No Tumor
 
-The goal of the project is to build an **efficient and accurate CNN-based classifier** for detecting brain tumor types from MRI images.
+The primary objective is to explore model development, training, and evaluation using modern computer vision techniques.
+
+---
+
+## Features
+
+- MobileNetV3Large transfer learning
+- TensorFlow/Keras implementation
+- Image preprocessing and augmentation
+- Model training and evaluation pipeline
+- Confusion matrix visualization
+- Google Colab compatible
+
+---
 
 ## Dataset
-
-Dataset used: **Brain Tumor MRI Dataset**
-
-Classes included:
-
-* Glioma
-* Meningioma
-* Pituitary
-* No Tumor
-
-Dataset source:
-https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
-
-Dataset structure:
 
 ```
 brain-tumor-mri-dataset/
@@ -30,126 +39,89 @@ brain-tumor-mri-dataset/
 ├── Training/
 │   ├── glioma/
 │   ├── meningioma/
-│   ├── pituitary/
-│   └── notumor/
+│   ├── notumor/
+│   └── pituitary/
 │
 └── Testing/
     ├── glioma/
     ├── meningioma/
-    ├── pituitary/
-    └── notumor/
+    ├── notumor/
+    └── pituitary/
 ```
+
+Classes:
+
+- Glioma
+- Meningioma
+- No Tumor
+- Pituitary
 
 ---
 
 ## Model Architecture
 
-The model uses **MobileNetV3Large as a feature extractor** with a custom classification head.
-
-Architecture pipeline:
-
-```
-Input Image (224×224×3)
-        ↓
-Data Augmentation
-        ↓
-MobileNetV3 Preprocessing
-        ↓
-MobileNetV3Large (Pretrained on ImageNet, Frozen)
-        ↓
-Global Average Pooling
-        ↓
-Batch Normalization
-        ↓
-Dense Layer (256 units, ReLU)
-        ↓
-Dropout (0.1)
-        ↓
-Dense Output Layer (4 classes, Softmax)
-```
+- **Base Model:** MobileNetV3Large (ImageNet pretrained)
+- Input Size: **224 × 224 × 3**
+- Global Average Pooling
+- Dense Classification Layer
+- Softmax Output (4 Classes)
 
 ---
-
-## Key Features
-
-* Transfer Learning using **MobileNetV3Large**
-* **Mixed Precision Training (FP16)** for faster computation
-* **Data Augmentation** for improved generalization
-* Automatic **convolution layer analysis table**
-* Efficient training pipeline using **tf.data**
-
----
-
-## Data Augmentation
-
-The following augmentation techniques are applied during training:
-
-* Random Horizontal Flip
-* Random Rotation (0.05)
-* Random Zoom (0.1)
-* Random Contrast (0.1)
-
-These help prevent overfitting and improve model robustness.
-
----
-
-## Training Configuration
-
-| Parameter     | Value                                            |
-| ------------- | ------------------------------------------------ |
-| Image Size    | 224 × 224                                        |
-| Batch Size    | 32                                               |
-| Epochs        | 40                                               |
-| Optimizer     | Adam                                             |
-| Learning Rate | 1e-4                                             |
-| Loss Function | Categorical Crossentropy (label smoothing = 0.1) |
-| Classes       | 4                                                |
-
----
-
-## Installation
-
-Install required dependencies:
-
-```
-pip install tensorflow opendatasets matplotlib pandas
-```
-
----
-
-## Model Evaluation
-
-After training, the model accuracy on Validation Data is ~93%.
 
 ## Technologies Used
 
-* Python
-* TensorFlow / Keras
-* MobileNetV3Large
-* OpenDatasets
-* Matplotlib
-* Pandas
+- Python
+- TensorFlow
+- Keras
+- NumPy
+- Matplotlib
+- OpenCV
+- Scikit-learn
+- Google Colab
 
 ---
 
-## Possible Improvements
+## Workflow
 
-Future enhancements may include:
-
-* Fine-tuning deeper layers of MobileNetV3
-* Using attention mechanisms
-* Hyperparameter tuning
-* Model deployment with Flask or FastAPI
-* Grad-CAM visualization for model interpretability
+1. Load MRI dataset
+2. Preprocess and augment images
+3. Build MobileNetV3Large transfer learning model
+4. Train and validate the model
+5. Evaluate model performance
+6. Visualize results using standard classification metrics
 
 ---
 
-## Author
+## Repository Structure
 
-Sudipon Makal
+```
+├── BRAIN_TUMOUR_PRED_MOBNETV3.ipynb
+├── dataset/
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
+---
+
+## Future Work
+
+- Experiment with additional CNN architectures
+- Integrate explainability methods such as Grad-CAM
+- Compare multiple transfer learning models
+- Optimize training through fine-tuning and hyperparameter tuning
+- Investigate deployment as a research demonstration
+
+---
+
+## Disclaimer
+
+This repository is a **research and learning project** intended to demonstrate deep learning techniques for image classification.
+
+It is **not** a medical device, **not** a diagnostic tool, and **not** suitable for clinical use. Any results produced by this model should not be interpreted as medical advice or used to make healthcare decisions.
 
 ---
 
 ## License
 
-This project is open-source and available under the **MIT License**.
+This project is licensed under the MIT License.
